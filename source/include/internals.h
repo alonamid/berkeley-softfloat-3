@@ -42,9 +42,10 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #include "primitives.h"
 #include "softfloat_types.h"
 
-union ui16_f16 { uint16_t ui; float16_t f; };
-union ui32_f32 { uint32_t ui; float32_t f; };
-union ui64_f64 { uint64_t ui; float64_t f; };
+union ui16_f16   { uint16_t ui; float16_t f; };
+union ui16_bf16  { uint16_t ui; bfloat16_t f; }
+union ui32_f32   { uint32_t ui; float32_t f; };
+union ui64_f64   { uint64_t ui; float64_t f; };
 
 #ifdef SOFTFLOAT_FAST_INT64
 union extF80M_extF80 { struct extFloat80M fM; extFloat80_t f; };
