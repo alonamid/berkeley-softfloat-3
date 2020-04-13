@@ -101,6 +101,27 @@ float16_t
 
 /*----------------------------------------------------------------------------
 *----------------------------------------------------------------------------*/
+#define signBF16UI( a ) ((bool) ((uint16_t) (a)>>15))
+#define expBF16UI( a ) ((int_fast16_t) ((a)>>7) & 0xFF)
+#define fracBF16UI( a ) ((a) & 0x007F)
+#define packToBF16UI( sign, exp, sig ) (((uint16_t) (sign)<<15) + ((uint16_t) (exp)<<7) + (sig))
+
+#define isNaNBF16UI( a ) (((~(a) & 0x7F80) == 0) && ((a) & 0x007F))
+
+struct exp8_sig16 { int_fast8_t exp; uint_fast16_t sig; };
+struct exp8_sig16 softfloat_normSubnormalBF16Sig( uint_fast16_t );
+
+bfloat16_t softfloat_roundPackToMF16( bool, int_fast16_t, uint_fast16_t );
+bfloat16_t softfloat_normRoundPackToBF16( bool, int_fast16_t, uint_fast16_t );
+
+bfloat16_t softfloat_addMagsF16( uint_fast16_t, uint_fast16_t );
+bfloat16_t softfloat_subMagsF16( uint_fast16_t, uint_fast16_t );
+bfloat16_t
+ softfloat_mulAddF16(
+     uint_fast16_t, uint_fast16_t, uint_fast16_t, uint_fast8_t );
+
+/*----------------------------------------------------------------------------
+*----------------------------------------------------------------------------*/
 #define signF32UI( a ) ((bool) ((uint32_t) (a)>>31))
 #define expF32UI( a ) ((int_fast16_t) ((a)>>23) & 0xFF)
 #define fracF32UI( a ) ((a) & 0x007FFFFF)
