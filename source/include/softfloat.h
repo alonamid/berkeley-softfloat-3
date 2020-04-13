@@ -174,6 +174,41 @@ bool f16_lt_quiet( float16_t, float16_t );
 bool f16_isSignalingNaN( float16_t );
 
 /*----------------------------------------------------------------------------
+| 16-bit brain floating-point operations.
+*----------------------------------------------------------------------------*/
+uint_fast32_t bf16_to_ui32( bfloat16_t, uint_fast8_t, bool );
+uint_fast64_t bf16_to_ui64( bfloat16_t, uint_fast8_t, bool );
+int_fast32_t bf16_to_i32( bfloat16_t, uint_fast8_t, bool );
+int_fast64_t bf16_to_i64( bfloat16_t, uint_fast8_t, bool );
+uint_fast32_t bf16_to_ui32_r_minMag( bfloat16_t, bool );
+uint_fast64_t bf16_to_ui64_r_minMag( bfloat16_t, bool );
+int_fast32_t bf16_to_i32_r_minMag( bfloat16_t, bool );
+int_fast64_t f16_to_i64_r_minMag( bfloat16_t, bool );
+float32_t bf16_to_f32( bfloat16_t );
+float64_t bf16_to_f64( bfloat16_t );
+#ifdef SOFTFLOAT_FAST_INT64
+extFloat80_t bf16_to_extF80( bfloat16_t );
+float128_t bf16_to_f128( bfloat16_t );
+#endif
+void bf16_to_extF80M( bfloat16_t, extFloat80_t * );
+void bf16_to_f128M( bfloat16_t, float128_t * );
+bfloat16_t bf16_roundToInt( bfloat16_t, uint_fast8_t, bool );
+bfloat16_t bf16_add( bfloat16_t, bfloat16_t );
+bfloat16_t bf16_sub( bfloat16_t, bfloat16_t );
+bfloat16_t bf16_mul( bfloat16_t, bfloat16_t );
+bfloat16_t bf16_mulAdd( bfloat16_t, bfloat16_t, bfloat16_t );
+bfloat16_t bf16_div( bfloat16_t, bfloat16_t );
+bfloat16_t bf16_rem( bfloat16_t, bfloat16_t );
+bfloat16_t bf16_sqrt( bfloat16_t );
+bool bf16_eq( bfloat16_t, bfloat16_t );
+bool bf16_le( bfloat16_t, bfloat16_t );
+bool bf16_lt( bfloat16_t, bfloat16_t );
+bool bf16_eq_signaling( bfloat16_t, bfloat16_t );
+bool bf16_le_quiet( bfloat16_t, bfloat16_t );
+bool bf16_lt_quiet( bfloat16_t, bfloat16_t );
+bool bf16_isSignalingNaN( bfloat16_t );
+
+/*----------------------------------------------------------------------------
 | 32-bit (single-precision) floating-point operations.
 *----------------------------------------------------------------------------*/
 uint_fast32_t f32_to_ui32( float32_t, uint_fast8_t, bool );
