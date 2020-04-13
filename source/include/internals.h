@@ -109,8 +109,8 @@ float16_t
 
 #define isNaNBF16UI( a ) (((~(a) & 0x7F80) == 0) && ((a) & 0x007F))
 
-struct exp8_sig16 { int_fast8_t exp; uint_fast16_t sig; };
-struct exp8_sig16 softfloat_normSubnormalBF16Sig( uint_fast16_t );
+struct exp16_sig16 { int_fast16_t exp; uint_fast16_t sig; };
+struct exp16_sig16 softfloat_normSubnormalBF16Sig( uint_fast16_t );
 
 bfloat16_t softfloat_roundPackToBF16( bool, int_fast16_t, uint_fast16_t );
 bfloat16_t softfloat_normRoundPackToBF16( bool, int_fast16_t, uint_fast16_t );
