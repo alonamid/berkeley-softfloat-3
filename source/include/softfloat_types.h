@@ -77,5 +77,12 @@ struct extFloat80M { uint16_t signExp; uint64_t signif; };
 *----------------------------------------------------------------------------*/
 typedef struct extFloat80M extFloat80_t;
 
+
+/*----------------------------------------------------------------------------
+| The type used to pass 16-bit brain floating-point arguments and
+| results to/from functions. TODO: further documentation
+*----------------------------------------------------------------------------*/
+typedef struct { uint16_t v; } bfloat16_t;
+
 #endif
 
