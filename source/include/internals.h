@@ -111,11 +111,11 @@ float16_t
 struct exp8_sig16 { int_fast8_t exp; uint_fast16_t sig; };
 struct exp8_sig16 softfloat_normSubnormalBF16Sig( uint_fast16_t );
 
-bfloat16_t softfloat_roundPackToMF16( bool, int_fast16_t, uint_fast16_t );
+bfloat16_t softfloat_roundPackToBF16( bool, int_fast16_t, uint_fast16_t );
 bfloat16_t softfloat_normRoundPackToBF16( bool, int_fast16_t, uint_fast16_t );
 
-bfloat16_t softfloat_addMagsF16( uint_fast16_t, uint_fast16_t );
-bfloat16_t softfloat_subMagsF16( uint_fast16_t, uint_fast16_t );
+bfloat16_t softfloat_addMagsBF16( uint_fast16_t, uint_fast16_t );
+bfloat16_t softfloat_subMagsBF16( uint_fast16_t, uint_fast16_t );
 bfloat16_t
  softfloat_mulAddF16(
      uint_fast16_t, uint_fast16_t, uint_fast16_t, uint_fast8_t );
