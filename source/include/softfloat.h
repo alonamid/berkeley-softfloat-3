@@ -183,7 +183,7 @@ int_fast64_t bf16_to_i64( bfloat16_t, uint_fast8_t, bool );
 uint_fast32_t bf16_to_ui32_r_minMag( bfloat16_t, bool );
 uint_fast64_t bf16_to_ui64_r_minMag( bfloat16_t, bool );
 int_fast32_t bf16_to_i32_r_minMag( bfloat16_t, bool );
-int_fast64_t f16_to_i64_r_minMag( bfloat16_t, bool );
+int_fast64_t bf16_to_i64_r_minMag( bfloat16_t, bool );
 float32_t bf16_to_f32( bfloat16_t );
 float64_t bf16_to_f64( bfloat16_t );
 #ifdef SOFTFLOAT_FAST_INT64
