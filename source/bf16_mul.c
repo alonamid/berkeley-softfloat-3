@@ -19,7 +19,7 @@ bfloat16_t bf16_mul( bfloat16_t a, bfloat16_t b )
     uint_fast16_t sigB;
     bool signZ;
     uint_fast16_t magBits;
-    struct exp8_sig16 normExpSig;
+    struct exp16_sig16 normExpSig;
     int_fast16_t expZ;
     uint_fast32_t sig32Z;
     uint_fast16_t sigZ, uiZ;
@@ -70,9 +70,6 @@ bfloat16_t bf16_mul( bfloat16_t a, bfloat16_t b )
     sigA = (sigA | 0x0080)<<7;
     sigB = (sigB | 0x0080)<<8;
     sig32Z = (uint_fast32_t) sigA * sigB;
-    // According to the FB paper, we need to perform RNE based of last 16bits?
-    // My thought: If odd (aka last bit is 1), we just add 1
-    if ( sig32Z & 0x00000001) sig32Z + 1;
     sigZ = sig32Z>>16;
     if ( sig32Z & 0xFFFF ) sigZ |= 1;
     if ( sigZ < 0x4000 ) {
