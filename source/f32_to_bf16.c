@@ -73,7 +73,7 @@ bfloat16_t f32_to_bf16( float32_t a )
     /*------------------------------------------------------------------------
     *------------------------------------------------------------------------*/
     frac16 = frac>>13; // conversion by truncation
-    return softfloat_roundPackToF16( sign, exp, frac16);
+    return softfloat_roundPackToBF16( sign, exp, frac16);
  uiZ:
     uZ.ui = uiZ;
     return uZ.f;
