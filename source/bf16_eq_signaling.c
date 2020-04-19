@@ -15,7 +15,7 @@ bool bf16_eq_signaling( bfloat16_t a, bfloat16_t b )
     uiA = uA.ui;
     uB.f = b;
     uiB = uB.ui;
-    if ( isNaNFB16UI( uiA ) || isNaNFB16UI( uiB ) ) {
+    if ( isNaNBF16UI( uiA ) || isNaNBF16UI( uiB ) ) {
         softfloat_raiseFlags( softfloat_flag_invalid );
         return false;
     }
