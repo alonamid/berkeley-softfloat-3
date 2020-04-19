@@ -55,7 +55,7 @@ else
     CC_LINUX := riscv$(XLEN)-linux-gnu-gcc
 endif
 
-COMPILE_C = $(CC_LINUX) -c $(SOFTFLOAT_OPTS) $(C_INCLUDES) -O2 -o $@
+COMPILE_C = $(CC_LINUX) -c $(SOFTFLOAT_OPTS) $(C_INCLUDES) -mcmodel=medany -O2 -o $@
 
 MAKELIB = ar crs $@
 
@@ -87,6 +87,8 @@ OBJS_SPECIALIZE = \
 OBJS_OTHERS = \
   s_roundToUI32$(OBJ) \
   s_roundToI32$(OBJ) \
+  s_normRoundPackToF32$(OBJ) \
+  s_roundPackToF32$(OBJ) \
   s_normSubnormalBF16Sig$(OBJ) \
   s_roundPackToBF16$(OBJ) \
   s_normRoundPackToBF16$(OBJ) \
