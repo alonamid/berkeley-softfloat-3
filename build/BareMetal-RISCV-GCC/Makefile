@@ -258,5 +258,5 @@ libsoftfloat$(LIB): $(OBJS_ALL)
 
 .PHONY: clean
 clean:
-	$(DELETE) $(OBJS_ALL) softfloat$(LIB)
+	$(DELETE) $(OBJS_ALL) libsoftfloat$(LIB)
 
