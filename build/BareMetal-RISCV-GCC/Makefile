@@ -125,6 +125,7 @@ OBJS_OTHERS = \
   s_normRoundPackToBF16$(OBJ) \
   s_subMagsBF16$(OBJ) \
   s_addMagsBF16$(OBJ) \
+  s_mulAddBF16$(OBJ) \
   s_normSubnormalF32Sig$(OBJ) \
   s_roundPackToF32$(OBJ) \
   s_normRoundPackToF32$(OBJ) \
@@ -234,6 +235,7 @@ OBJS_OTHERS = \
   bf16_lt$(OBJ) \
   bf16_lt_quiet$(OBJ) \
   bf16_mul$(OBJ) \
+  bf16_mulAdd$(OBJ) \
   f32_to_bf16$(OBJ) \
   i32_to_bf16$(OBJ) \
 
