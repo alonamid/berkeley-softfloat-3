@@ -46,5 +46,5 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 /*----------------------------------------------------------------------------
 *----------------------------------------------------------------------------*/
-#define THREAD_LOCAL _Thread_local
+#define THREAD_LOCAL __thread
 
