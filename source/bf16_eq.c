@@ -25,3 +25,5 @@ bool bf16_eq( bfloat16_t a, bfloat16_t b )
         return false;
     }
     return (uiA == uiB) || ! (uint16_t) ((uiA | uiB)<<1);
+
+}

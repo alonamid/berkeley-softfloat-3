@@ -50,7 +50,7 @@ bfloat16_t i32_to_bf16( int32_t a )
     sign = (a < 0);
     if ( ! (a & 0x7FFFFFFF) ) {
         uZ.ui = sign ? packToF32UI( 1, 0x9E, 0 ) : 0;
-        return uZ.f;
+        return f32_to_bf16(uZ.f);
     }
     absA = sign ? -(uint_fast32_t) a : (uint_fast32_t) a;
     // bit of a hack, convert to f32 and then convert f32 to bf16

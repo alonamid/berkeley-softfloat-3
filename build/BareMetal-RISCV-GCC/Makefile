@@ -108,7 +108,6 @@ OBJS_SPECIALIZE = \
   s_propagateNaNF64UI$(OBJ) \
   s_commonNaNToF16UI$(OBJ) \
   s_f16UIToCommonNaN$(OBJ) \
-  s_propagateNaNExtF80UI$(OBJ) \
 
 OBJS_OTHERS = \
   s_roundToUI32$(OBJ) \
