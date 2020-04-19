@@ -108,7 +108,6 @@ OBJS_SPECIALIZE = \
   s_propagateNaNF64UI$(OBJ) \
   s_commonNaNToF16UI$(OBJ) \
   s_f16UIToCommonNaN$(OBJ) \
-  s_propagateNaNExtF80UI$(OBJ) \
 
 OBJS_OTHERS = \
   s_roundToUI32$(OBJ) \
@@ -121,6 +120,11 @@ OBJS_OTHERS = \
   s_addMagsF16$(OBJ) \
   s_subMagsF16$(OBJ) \
   s_mulAddF16$(OBJ) \
+  s_normSubnormalBF16Sig$(OBJ) \
+  s_roundPackToBF16$(OBJ) \
+  s_normRoundPackToBF16$(OBJ) \
+  s_subMagsBF16$(OBJ) \
+  s_addMagsBF16$(OBJ) \
   s_normSubnormalF32Sig$(OBJ) \
   s_roundPackToF32$(OBJ) \
   s_normRoundPackToF32$(OBJ) \
