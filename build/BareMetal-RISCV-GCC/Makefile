@@ -35,6 +35,7 @@
 #=============================================================================
 
 # Edit lines marked with `==>'.  See "SoftFloat-source.html".
+XLEN ?= 64
 
 SOURCE_DIR ?= ../../source
 SPECIALIZE_TYPE ?= RISCV
@@ -45,7 +46,17 @@ SOFTFLOAT_OPTS ?= \
 
 DELETE = rm -f
 C_INCLUDES = -I. -I$(SOURCE_DIR)/$(SPECIALIZE_TYPE) -I$(SOURCE_DIR)/include
-COMPILE_C = cc -c $(SOFTFLOAT_OPTS) $(C_INCLUDES) -O2 -o $@
+
+CC_LINUX_PRESENT := $(shell command -v riscv$(XLEN)-unknown-linux-gnu-gcc 2> /dev/null)
+
+ifdef CC_LINUX_PRESENT
+    CC_LINUX := riscv$(XLEN)-unknown-linux-gnu-gcc
+else
+    CC_LINUX := riscv$(XLEN)-linux-gnu-gcc
+endif
+
+COMPILE_C = $(CC_LINUX) -c $(SOFTFLOAT_OPTS) $(C_INCLUDES) -O2 -o $@
+
 MAKELIB = ar crs $@
 
 OBJ = .o
@@ -54,7 +65,7 @@ LIB = .a
 OTHER_HEADERS =
 
 .PHONY: all
-all: softfloat$(LIB)
+all: libsoftfloat$(LIB)
 
 OBJS_PRIMITIVES = \
   s_compare96M$(OBJ) \
