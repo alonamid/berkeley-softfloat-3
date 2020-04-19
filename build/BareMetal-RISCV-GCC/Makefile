@@ -75,7 +75,7 @@ OBJS_PRIMITIVES = \
   s_shortShiftRightM$(OBJ) \
   s_shortShiftRightJam64$(OBJ) \
   s_shortShiftRightJamM$(OBJ) \
-  s_shiftRightJam32$(OBJ) \
+  s_shiftRightJam16$(OBJ) \
   s_shiftRightJam32$(OBJ) \
   s_shiftRightJam64$(OBJ) \
   s_shiftRightJamM$(OBJ) \
@@ -103,8 +103,6 @@ OBJS_SPECIALIZE = \
   s_f64UIToCommonNaN$(OBJ) \
   softfloat_raiseFlags$(OBJ) \
   s_propagateNaNF16UI$(OBJ) \
-  s_commonNaNToExtF80UI$(OBJ) \
-  s_extF80UIToCommonNaN$(OBJ) \
   s_propagateNaNF32UI$(OBJ) \
   s_propagateNaNBF16UI$(OBJ) \
   s_propagateNaNF64UI$(OBJ) \
