@@ -77,6 +77,7 @@ OBJS_PRIMITIVES = \
   s_shortShiftRightJam64$(OBJ) \
   s_shortShiftRightJamM$(OBJ) \
   s_shiftRightJam32$(OBJ) \
+  s_shiftRightJam32$(OBJ) \
   s_shiftRightJam64$(OBJ) \
   s_shiftRightJamM$(OBJ) \
   s_shiftRightM$(OBJ) \
@@ -99,24 +100,31 @@ OBJS_PRIMITIVES = \
   s_remStepMBy32$(OBJ) \
 
 OBJS_SPECIALIZE = \
-  softfloat_raiseFlags$(OBJ) \
-  s_f16UIToCommonNaN$(OBJ) \
-  s_commonNaNToF16UI$(OBJ) \
-  s_propagateNaNF16UI$(OBJ) \
-  s_f32UIToCommonNaN$(OBJ) \
-  s_commonNaNToF32UI$(OBJ) \
-  s_propagateNaNF32UI$(OBJ) \
-  s_f64UIToCommonNaN$(OBJ) \
-  s_commonNaNToF64UI$(OBJ) \
-  s_propagateNaNF64UI$(OBJ) \
   extF80M_isSignalingNaN$(OBJ) \
-  s_extF80MToCommonNaN$(OBJ) \
-  s_commonNaNToExtF80M$(OBJ) \
-  s_propagateNaNExtF80M$(OBJ) \
-  f128M_isSignalingNaN$(OBJ) \
-  s_f128MToCommonNaN$(OBJ) \
-  s_commonNaNToF128M$(OBJ) \
+  s_commonNaNToF32UI$(OBJ) \
+  s_f32UIToCommonNaN$(OBJ) \
   s_propagateNaNF128M$(OBJ) \
+  f128M_isSignalingNaN$(OBJ) \
+  s_commonNaNToF64UI$(OBJ) \
+  s_f64UIToCommonNaN$(OBJ) \
+  s_propagateNaNF128UI$(OBJ) \
+  s_commonNaNToExtF80M$(OBJ) \
+  s_extF80MToCommonNaN$(OBJ) \
+  softfloat_raiseFlags$(OBJ) \
+  s_propagateNaNF16UI$(OBJ) \
+  s_commonNaNToExtF80UI$(OBJ) \
+  s_extF80UIToCommonNaN$(OBJ) \
+  s_propagateNaNF32UI$(OBJ) \
+  s_commonNaNToF128M$(OBJ) \
+  s_f128MToCommonNaN$(OBJ) \
+  s_propagateNaNBF16UI$(OBJ) \
+  s_propagateNaNF64UI$(OBJ) \
+  s_commonNaNToF128UI$(OBJ) \
+  s_f128UIToCommonNaN$(OBJ) \
+  s_propagateNaNExtF80M$(OBJ) \
+  s_commonNaNToF16UI$(OBJ) \
+  s_f16UIToCommonNaN$(OBJ) \
+  s_propagateNaNExtF80UI$(OBJ) \
 
 OBJS_OTHERS = \
   s_roundToUI32$(OBJ) \
@@ -309,6 +317,16 @@ OBJS_OTHERS = \
   f128M_eq_signaling$(OBJ) \
   f128M_le_quiet$(OBJ) \
   f128M_lt_quiet$(OBJ) \
+  bf16_add$(OBJ) \
+  bf16_eq$(OBJ) \
+  bf16_eq_signaling$(OBJ) \
+  bf16_le$(OBJ) \
+  bf16_le_quiet$(OBJ) \
+  bf16_lt$(OBJ) \
+  bf16_lt_quiet$(OBJ) \
+  bf16_mul$(OBJ) \
+  f32_to_bf16$(OBJ) \
+  i32_to_bf16$(OBJ) \
 
 OBJS_ALL = $(OBJS_PRIMITIVES) $(OBJS_SPECIALIZE) $(OBJS_OTHERS)
 
@@ -326,7 +344,7 @@ $(OBJS_PRIMITIVES) $(OBJS_OTHERS): %$(OBJ): $(SOURCE_DIR)/%.c
 $(OBJS_SPECIALIZE): %$(OBJ): $(SOURCE_DIR)/$(SPECIALIZE_TYPE)/%.c
 	$(COMPILE_C) $(SOURCE_DIR)/$(SPECIALIZE_TYPE)/$*.c
 
-softfloat$(LIB): $(OBJS_ALL)
+libsoftfloat$(LIB): $(OBJS_ALL)
 	$(DELETE) $@
 	$(MAKELIB) $^
 
