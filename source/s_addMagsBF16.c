@@ -69,47 +69,49 @@ bfloat16_t softfloat_addMagsBF16( uint_fast16_t uiA, uint_fast16_t uiB )
             uiZ = uiA + sigB;
             goto uiZ;
         }
-        if ( expA == 0xFF ) {
+        if ( expA == BF16EXPMASK ) {
             if ( sigA | sigB ) goto propagateNaN;
             uiZ = uiA;
             goto uiZ;
         }
         signZ = signBF16UI( uiA );
         expZ = expA;
-        sigZ = 0x0100 + sigA + sigB;
-        if ( ! (sigZ & 1) && (expZ < 0xFE) ) {
+        sigZ = (1 << (BF16SIGBITS + 1)) + sigA + sigB;
+        if ( ! (sigZ & 1) && (expZ < (BF16EXPMASK-1)) ) {
             uiZ = packToBF16UI( signZ, expZ, sigZ>>1 );
             goto uiZ;
         }
-        sigZ <<= 6;
+        sigZ <<= (BF16SIGMSBNORM - 1);
+        //BF16SIGMSBNORM - 1 for addition overflow
     } else {
         /*--------------------------------------------------------------------
         *--------------------------------------------------------------------*/
         signZ = signBF16UI( uiA );
-        sigA <<= 6;
-        sigB <<= 6;
+        sigA <<= (BF16SIGMSBNORM - 1);
+        sigB <<= (BF16SIGMSBNORM - 1);
+        //BF16SIGMSBNORM - 1 for addition overflow
         if ( expDiff < 0 ) {
-            if ( expB == 0xFF ) {
+            if ( expB == BF16EXPMASK ) {
                 if ( sigB ) goto propagateNaN;
-                uiZ = packToBF16UI( signZ, 0xFF, 0 );
+                uiZ = packToBF16UI( signZ, BF16EXPMASK, 0 );
                 goto uiZ;
             }
             expZ = expB;
-            sigA += expA ? 0x2000 : sigA;
+            sigA += expA ? (1 << (BF16SIGBITS + BF16SIGMSBNORM - 1)) : sigA;
             sigA = softfloat_shiftRightJam16( sigA, -expDiff );
             //TODO: possible that softfloat_shiftRightJam32() may work here instead
         } else {
-            if ( expA == 0xFF ) {
+            if ( expA == BF16EXPMASK ) {
                 if ( sigA ) goto propagateNaN;
                 uiZ = uiA;
                 goto uiZ;
             }
             expZ = expA;
-            sigB += expB ? 0x2000 : sigB;
+            sigB += expB ? (1 << (BF16SIGBITS + BF16SIGMSBNORM - 1)) : sigB;
             sigB = softfloat_shiftRightJam16( sigB, expDiff );
         }
-        sigZ = 0x2000 + sigA + sigB;
-        if ( sigZ < 0x4000 ) {
+        sigZ = (1 << (BF16SIGBITS + BF16SIGMSBNORM - 1)) + sigA + sigB;
+        if ( sigZ < (1 << (BF16SIGBITS + BF16SIGMSBNORM - 1)) ) {
             --expZ;
             sigZ <<= 1;
         }

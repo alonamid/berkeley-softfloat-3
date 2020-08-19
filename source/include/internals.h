@@ -102,12 +102,27 @@ float16_t
 
 /*----------------------------------------------------------------------------
 *----------------------------------------------------------------------------*/
-#define signBF16UI( a ) ((bool) ((uint16_t) (a)>>15))
-#define expBF16UI( a ) ((int_fast16_t) ((a)>>7) & 0xFF)
-#define fracBF16UI( a ) ((a) & 0x007F)
-#define packToBF16UI( sign, exp, sig ) (((uint16_t) (sign)<<15) + ((uint16_t) (exp)<<7) + (sig))
+#ifdef GEMMINI_PARAMS_H
+#define BF16SIGBITS SIG_BITS 
+#define BF16EXPBITS EXP_BITS 
+#else
+#define BF16SIGBITS 7 
+#define BF16EXPBITS 8 
+#endif
 
-#define isNaNBF16UI( a ) (((~(a) & 0x7F80) == 0) && ((a) & 0x007F))
+#define BF16FRACMASK ((uint16_t)1 << BF16SIGBITS)-1
+#define BF16EXPMASK ((uint16_t)1 << BF16EXPBITS)-1
+#define BF16SIGNMSBNORM sizeof(uint16_t) - BFSIGBITS - 1 - 1
+//normalize/align the significands to the MSB so the roundding function roundPackToBF16
+//is reusable across operations 
+//1 bit for the implicit mantissa leading bit, 1 bit for rounding overflow
+
+#define signBF16UI( a ) ((bool) ((uint16_t) (a)>>15))
+#define expBF16UI( a ) ((int_fast16_t) ((a)>>BF16SIGBITS) & BF16EXPMASK)
+#define fracBF16UI( a ) ((a) & BF16FRACMASK)
+#define packToBF16UI( sign, exp, sig ) (((uint16_t) (sign)<<15) + ((uint16_t) (exp)<<BF16SIGBITS) + (sig))
+
+#define isNaNBF16UI( a ) (((~(a) & (BF16EXPMASK << BF16SIGBITS)) == 0) && ((a) & BF16FRACMASK))
 
 struct exp16_sig16 { int_fast16_t exp; uint_fast16_t sig; };
 struct exp16_sig16 softfloat_normSubnormalBF16Sig( uint_fast16_t );
